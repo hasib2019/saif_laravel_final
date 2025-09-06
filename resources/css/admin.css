@@ -1,0 +1,113 @@
+/* Admin-specific styles */
+
+/* Override Bootstrap variables for admin theme */
+:root {
+    --bs-primary: #0d6efd;
+    --bs-secondary: #6c757d;
+    --bs-success: #198754;
+    --bs-info: #0dcaf0;
+    --bs-warning: #ffc107;
+    --bs-danger: #dc3545;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+}
+
+/* Admin layout optimizations */
+.admin-sidebar {
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+}
+
+.admin-content {
+    transition: margin-left 0.3s ease-in-out;
+    will-change: margin-left;
+}
+
+/* Form optimizations */
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+}
+
+/* Table optimizations */
+.table {
+    --bs-table-bg: transparent;
+}
+
+.table-hover > tbody > tr:hover > * {
+    --bs-table-accent-bg: var(--bs-table-hover-bg);
+    color: var(--bs-table-hover-color);
+}
+
+/* Card optimizations */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+/* Button optimizations */
+.btn {
+    transition: all 0.15s ease-in-out;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Responsive optimizations */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .admin-sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+}
+
+/* Print optimizations */
+@media print {
+    .admin-sidebar,
+    .btn,
+    .pagination {
+        display: none !important;
+    }
+    
+    .admin-content {
+        margin-left: 0 !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bs-body-bg: #212529;
+        --bs-body-color: #dee2e6;
+    }
+    
+    .card {
+        background-color: #343a40;
+        border-color: #495057;
+    }
+    
+    .table {
+        --bs-table-bg: #343a40;
+        --bs-table-color: #dee2e6;
+    }
+}

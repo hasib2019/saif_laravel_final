@@ -1,0 +1,251 @@
+// SCSS Variables for the application
+
+// Color palette
+$primary: #0d6efd;
+$secondary: #6c757d;
+$success: #198754;
+$info: #0dcaf0;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #212529;
+
+// Gray scale
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+
+// Typography
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.25rem;
+
+$font-weight-lighter: lighter;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-bolder: bolder;
+
+$line-height-base: 1.5;
+$line-height-sm: 1.25;
+$line-height-lg: 2;
+
+// Spacing
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+// Border
+$border-width: 1px;
+$border-style: solid;
+$border-color: $gray-300;
+$border-radius: 0.375rem;
+$border-radius-sm: 0.25rem;
+$border-radius-lg: 0.5rem;
+$border-radius-xl: 1rem;
+$border-radius-xxl: 2rem;
+$border-radius-pill: 50rem;
+
+// Box shadow
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15);
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075);
+$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175);
+$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075);
+
+// Transitions
+$transition-base: all 0.2s ease-in-out;
+$transition-fade: opacity 0.15s linear;
+$transition-collapse: height 0.35s ease;
+
+// Grid breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Container max widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// Components
+$component-active-color: $white;
+$component-active-bg: $primary;
+
+// Forms
+$input-bg: $white;
+$input-disabled-color: $gray-600;
+$input-disabled-bg: $gray-200;
+$input-disabled-border-color: null;
+$input-padding-y: 0.375rem;
+$input-padding-x: 0.75rem;
+$input-font-family: null;
+$input-font-size: $font-size-base;
+$input-font-weight: $font-weight-normal;
+$input-line-height: $line-height-base;
+$input-color: $gray-900;
+$input-border-color: $gray-400;
+$input-border-width: $border-width;
+$input-box-shadow: $box-shadow-inset;
+$input-border-radius: $border-radius;
+$input-focus-bg: $input-bg;
+$input-focus-border-color: tint-color($component-active-bg, 50%);
+$input-focus-color: $input-color;
+$input-focus-width: 0.25rem;
+$input-focus-box-shadow: 0 0 0 $input-focus-width rgba($component-active-bg, 0.25);
+
+// Buttons
+$btn-padding-y: 0.375rem;
+$btn-padding-x: 0.75rem;
+$btn-font-family: null;
+$btn-font-size: $font-size-base;
+$btn-line-height: $line-height-base;
+$btn-white-space: null;
+$btn-padding-y-sm: 0.25rem;
+$btn-padding-x-sm: 0.5rem;
+$btn-font-size-sm: $font-size-sm;
+$btn-padding-y-lg: 0.5rem;
+$btn-padding-x-lg: 1rem;
+$btn-font-size-lg: $font-size-lg;
+$btn-border-width: $border-width;
+$btn-font-weight: $font-weight-normal;
+$btn-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px rgba($black, 0.075);
+$btn-focus-width: $input-focus-width;
+$btn-focus-box-shadow: $input-focus-box-shadow;
+$btn-disabled-opacity: 0.65;
+$btn-active-box-shadow: inset 0 3px 5px rgba($black, 0.125);
+$btn-link-color: $primary;
+$btn-link-hover-color: shade-color($primary, 20%);
+$btn-link-disabled-color: $gray-600;
+$btn-border-radius: $border-radius;
+$btn-border-radius-sm: $border-radius-sm;
+$btn-border-radius-lg: $border-radius-lg;
+$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+// Cards
+$card-spacer-y: $spacer;
+$card-spacer-x: $spacer;
+$card-title-spacer-y: $spacer * 0.5;
+$card-title-color: null;
+$card-subtitle-color: $gray-600;
+$card-border-width: $border-width;
+$card-border-color: rgba($black, 0.125);
+$card-border-radius: $border-radius;
+$card-box-shadow: null;
+$card-inner-border-radius: subtract($card-border-radius, $card-border-width);
+$card-cap-padding-y: $card-spacer-y * 0.5;
+$card-cap-padding-x: $card-spacer-x;
+$card-cap-bg: rgba($black, 0.03);
+$card-cap-color: null;
+$card-height: null;
+$card-color: null;
+$card-bg: $white;
+$card-img-overlay-padding: $spacer;
+$card-group-margin: $grid-gutter-width * 0.5;
+
+// Tables
+$table-cell-padding-y: 0.5rem;
+$table-cell-padding-x: 0.5rem;
+$table-cell-padding-y-sm: 0.25rem;
+$table-cell-padding-x-sm: 0.25rem;
+$table-cell-vertical-align: top;
+$table-color: var(--#{$prefix}body-color);
+$table-bg: transparent;
+$table-accent-bg: transparent;
+$table-th-font-weight: null;
+$table-striped-color: $table-color;
+$table-striped-bg-factor: 0.05;
+$table-striped-bg: rgba($black, $table-striped-bg-factor);
+$table-active-color: $table-color;
+$table-active-bg-factor: 0.1;
+$table-active-bg: rgba($black, $table-active-bg-factor);
+$table-hover-color: $table-color;
+$table-hover-bg-factor: 0.075;
+$table-hover-bg: rgba($black, $table-hover-bg-factor);
+$table-border-factor: 0.1;
+$table-border-width: $border-width;
+$table-border-color: rgba($black, $table-border-factor);
+$table-striped-order: odd;
+$table-striped-columns-order: even;
+$table-group-separator-color: currentcolor;
+$table-caption-color: $gray-600;
+$table-bg-scale: -80%;
+
+// Z-index master list
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-offcanvas-backdrop: 1040;
+$zindex-offcanvas: 1045;
+$zindex-modal-backdrop: 1050;
+$zindex-modal: 1055;
+$zindex-popover: 1070;
+$zindex-tooltip: 1080;
+$zindex-toast: 1090;
+
+// Custom variables for admin theme
+$admin-sidebar-width: 250px;
+$admin-sidebar-collapsed-width: 60px;
+$admin-header-height: 60px;
+$admin-footer-height: 50px;
+
+// Admin color scheme
+$admin-primary: #2c3e50;
+$admin-secondary: #34495e;
+$admin-accent: #3498db;
+$admin-success: #27ae60;
+$admin-warning: #f39c12;
+$admin-danger: #e74c3c;
+$admin-info: #17a2b8;
+$admin-light: #ecf0f1;
+$admin-dark: #2c3e50;
+
+// Performance optimizations
+$enable-caret: true;
+$enable-rounded: true;
+$enable-shadows: true;
+$enable-gradients: false;
+$enable-transitions: true;
+$enable-reduced-motion: true;
+$enable-smooth-scroll: true;
+$enable-grid-classes: true;
+$enable-container-classes: true;
+$enable-cssgrid: false;
+$enable-button-pointers: true;
+$enable-rfs: true;
+$enable-validation-icons: true;
+$enable-negative-margins: false;
+$enable-deprecation-messages: true;
+$enable-important-utilities: true;
+$enable-dark-mode: true;
+
+// Print
+$print-page-size: a3;
+$print-body-min-width: map-get($grid-breakpoints, "lg");

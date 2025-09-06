@@ -1,0 +1,89 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('products', function (Blueprint $table) {
+            // Add indexes for commonly queried columns
+            $table->index('category_id'); // For filtering by category
+            $table->index('featured'); // For featured products queries
+            $table->index('is_active'); // For active/inactive filtering
+            $table->index(['category_id', 'featured']); // Composite index for category + featured
+            $table->index(['is_active', 'featured']); // Composite index for active + featured
+            $table->index('created_at'); // For sorting by creation date
+            $table->index('updated_at'); // For sorting by update date
+        });
+
+        Schema::table('categories', function (Blueprint $table) {
+            // Add indexes for commonly queried columns
+            $table->index('is_active'); // For active/inactive filtering
+            $table->index('sort_order'); // For ordering categories
+            $table->index(['is_active', 'sort_order']); // Composite index for active + sort order
+        });
+
+        Schema::table('pages', function (Blueprint $table) {
+            // Add indexes for commonly queried columns
+            $table->index('is_active'); // For active/inactive filtering
+            $table->index('show_in_menu'); // For menu display filtering
+            $table->index('sort_order'); // For ordering pages
+            $table->index(['is_active', 'show_in_menu']); // Composite index for active + menu display
+            $table->index(['show_in_menu', 'sort_order']); // Composite index for menu + sort order
+        });
+
+        Schema::table('admins', function (Blueprint $table) {
+            // Add index for status filtering
+            $table->index('status');
+        });
+
+        Schema::table('super_admins', function (Blueprint $table) {
+            // Add index for status filtering
+            $table->index('status');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropIndex(['category_id']);
+            $table->dropIndex(['featured']);
+            $table->dropIndex(['is_active']);
+            $table->dropIndex(['category_id', 'featured']);
+            $table->dropIndex(['is_active', 'featured']);
+            $table->dropIndex(['created_at']);
+            $table->dropIndex(['updated_at']);
+        });
+
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropIndex(['is_active']);
+            $table->dropIndex(['sort_order']);
+            $table->dropIndex(['is_active', 'sort_order']);
+        });
+
+        Schema::table('pages', function (Blueprint $table) {
+            $table->dropIndex(['is_active']);
+            $table->dropIndex(['show_in_menu']);
+            $table->dropIndex(['sort_order']);
+            $table->dropIndex(['is_active', 'show_in_menu']);
+            $table->dropIndex(['show_in_menu', 'sort_order']);
+        });
+
+        Schema::table('admins', function (Blueprint $table) {
+            $table->dropIndex(['status']);
+        });
+
+        Schema::table('super_admins', function (Blueprint $table) {
+            $table->dropIndex(['status']);
+        });
+    }
+};
