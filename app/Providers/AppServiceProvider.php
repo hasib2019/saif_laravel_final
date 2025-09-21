@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
+use Illuminate\Foundation\AliasLoader;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Page;
@@ -33,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Intervention Image v3 doesn't use facades - ImageManager is used directly
+        
         // Register model observers
         Category::observe(CategoryObserver::class);
         Product::observe(ProductObserver::class);

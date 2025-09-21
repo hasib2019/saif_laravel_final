@@ -17,7 +17,63 @@
 
     <!-- Custom CSS -->
     <style>
-    
+        /* Top Header Styles */
+        .top-header {
+            background-color: #1a1a1a !important;
+            border-bottom: 1px solid #333;
+            font-size: 0.875rem;
+        }
+
+        .top-header a {
+            transition: color 0.3s ease;
+        }
+
+        .top-header a:hover {
+            color: #f8f9fa !important;
+            text-decoration: none;
+        }
+
+        .top-header .dropdown-menu {
+            background-color: #2c2c2c;
+            border: 1px solid #444;
+            min-width: 120px;
+        }
+
+        .top-header .dropdown-item {
+            color: #fff;
+            font-size: 0.875rem;
+        }
+
+        .top-header .dropdown-item:hover {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .top-header .dropdown-item.active {
+            background-color: #007bff;
+        }
+
+        /* Main Navigation Styles */
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #333 !important;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #007bff !important;
+            font-weight: 600;
+        }
+
         .video-section {
             position: relative;
             width: 100%;
@@ -303,17 +359,116 @@
             background-color: #f8f9fa;
             font-weight: bold;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-header .col-md-6 {
+                text-align: center !important;
+            }
+
+            .top-header .d-flex {
+                justify-content: center !important;
+            }
+
+            .top-header .row {
+                flex-direction: column;
+            }
+
+            .top-header .col-md-6:first-child {
+                margin-bottom: 0.5rem;
+            }
+
+            .navbar-nav .nav-link {
+                margin: 0.25rem 0;
+                text-align: center;
+            }
+
+            .navbar-toggler {
+                border: none;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .navbar-collapse {
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .top-header {
+                padding: 0.5rem 0;
+            }
+
+            .top-header small {
+                font-size: 0.75rem;
+            }
+
+            .navbar {
+                padding: 0.5rem 0;
+            }
+
+            .navbar-brand img {
+                height: 30px !important;
+            }
+        }
     </style>
 
     @stack('styles')
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Top Black Header -->
+    <div class="top-header bg-dark text-white py-2">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <small>MIN | ∼ $37.13 (0.92%)</small>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a href="{{ route('contact') }}" class="text-white text-decoration-none me-3">
+                            <small>Contact</small>
+                        </a>
+                        <span class="text-white me-3">|</span>
+                        <a href="#" class="text-white text-decoration-none me-3">
+                            <small>Suppliers</small>
+                        </a>
+                        <span class="text-white me-3">|</span>
+                        <!-- Language Switcher -->
+                        <div class="dropdown">
+                            <a class="text-white text-decoration-none dropdown-toggle" href="#" id="topLanguageDropdown" role="button" data-bs-toggle="dropdown">
+                                <small>
+                                    @if (app()->getLocale() == 'ar')
+                                        العربية
+                                    @else
+                                        English
+                                    @endif
+                                </small>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}"
+                                        href="{{ route('language.switch', 'en') }}">English</a></li>
+                                <li><a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'active' : '' }}"
+                                        href="{{ route('language.switch', 'ar') }}">العربية</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-sm btn-outline-light ms-3" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                {{ config('app.name', 'Laravel') }}
+                @if($globalSettings->logo_path)
+                    <img src="{{ asset($globalSettings->logo_path) }}" alt="{{ config('app.name', 'Laravel') }}" style="height: 40px;">
+                @else
+                    {{ config('app.name', 'Laravel') }}
+                @endif
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -324,49 +479,25 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
-                            href="{{ route('home') }}">{{ __('messages.home') }}</a>
+                            href="{{ route('home') }}">About us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('catalogs') ? 'active' : '' }}"
-                            href="{{ route('catalogs') }}">{{ __('messages.catalogs') }}</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button"
-                            data-bs-toggle="dropdown">
-                            {{ __('messages.custom_page') }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            @foreach (\App\Models\Page::where('is_active', true)->where('show_in_menu', true)->orderBy('sort_order')->get() as $page)
-                                <li><a class="dropdown-item"
-                                        href="{{ route('page.show', $page->slug) }}">{{ $page->title }}</a></li>
-                            @endforeach
-                        </ul>
+                            href="{{ route('catalogs') }}">Our business</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"
-                            href="{{ route('about') }}">{{ __('messages.about_us') }}</a>
+                        <a class="nav-link {{ request()->routeIs('gallery*') ? 'active' : '' }}"
+                            href="{{ route('gallery') }}">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
-                            href="{{ route('contact') }}">{{ __('messages.contact_us') }}</a>
+                        <a class="nav-link" href="#">Sustainability</a>
                     </li>
-
-                    <!-- Language Switcher -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
-                            data-bs-toggle="dropdown">
-                            @if (app()->getLocale() == 'ar')
-                                🇸🇦 العربية
-                            @else
-                                🇺🇸 English
-                            @endif
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}"
-                                    href="{{ route('language.switch', 'en') }}">🇺🇸 English</a></li>
-                            <li><a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'active' : '' }}"
-                                    href="{{ route('language.switch', 'ar') }}">🇸🇦 العربية</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Investor Centre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('news.*') ? 'active' : '' }}" 
+                           href="{{ route('news.index') }}">News & media</a>
                     </li>
                 </ul>
             </div>

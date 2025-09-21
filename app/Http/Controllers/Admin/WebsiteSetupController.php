@@ -156,20 +156,26 @@ class WebsiteSetupController extends Controller
 
         // Handle logo upload
         if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            $data['logo_path'] = $logoPath;
+            $logoFile = $request->file('logo');
+            $logoName = time() . '_logo.' . $logoFile->getClientOriginalExtension();
+            $logoFile->move(public_path('logos'), $logoName);
+            $data['logo_path'] = 'logos/' . $logoName;
         }
 
         // Handle favicon upload
         if ($request->hasFile('favicon')) {
-            $faviconPath = $request->file('favicon')->store('favicons', 'public');
-            $data['favicon_path'] = $faviconPath;
+            $faviconFile = $request->file('favicon');
+            $faviconName = time() . '_favicon.' . $faviconFile->getClientOriginalExtension();
+            $faviconFile->move(public_path('favicons'), $faviconName);
+            $data['favicon_path'] = 'favicons/' . $faviconName;
         }
 
         // Handle OG image upload
         if ($request->hasFile('og_image')) {
-            $ogImagePath = $request->file('og_image')->store('og-image', 'public');
-            $data['og_image_path'] = $ogImagePath;
+            $ogImageFile = $request->file('og_image');
+            $ogImageName = time() . '_og_image.' . $ogImageFile->getClientOriginalExtension();
+            $ogImageFile->move(public_path('og-images'), $ogImageName);
+            $data['og_image_path'] = 'og-images/' . $ogImageName;
         }
 
         WebsiteSettings::updateSettings($data);

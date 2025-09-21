@@ -73,12 +73,12 @@
                                                 <i class="fas fa-image me-1"></i>Logo
                                             </label>
                                             @if($settings->logo_path)
-                                                <div class="mb-2">
-                                                    <img src="{{ asset('storage/' . $settings->logo_path) }}" 
-                                                         alt="Current Logo" class="img-thumbnail" style="max-height: 100px;">
-                                                    <p class="text-muted small mt-1">Current logo</p>
-                                                </div>
-                                            @endif
+                                    <div class="mb-2">
+                                        <img src="{{ asset($settings->logo_path) }}" 
+                                             alt="Current Logo" class="img-thumbnail" style="max-height: 100px;">
+                                        <p class="text-muted small mt-1">Current logo</p>
+                                    </div>
+                                @endif
                                             <input type="file" class="form-control @error('logo') is-invalid @enderror" 
                                                    id="logo" name="logo" accept="image/*">
                                             <div class="form-text">Upload a new logo (JPG, PNG, SVG). Recommended size: 200x60px</div>
@@ -93,12 +93,12 @@
                                                 <i class="fas fa-star me-1"></i>Favicon
                                             </label>
                                             @if($settings->favicon_path)
-                                                <div class="mb-2">
-                                                    <img src="{{ asset('storage/' . $settings->favicon_path) }}" 
-                                                         alt="Current Favicon" class="img-thumbnail" style="max-height: 32px;">
-                                                    <p class="text-muted small mt-1">Current favicon</p>
-                                                </div>
-                                            @endif
+                                    <div class="mb-2">
+                                        <img src="{{ asset($settings->favicon_path) }}" 
+                                             alt="Current Favicon" class="img-thumbnail" style="max-height: 32px;">
+                                        <p class="text-muted small mt-1">Current favicon</p>
+                                    </div>
+                                @endif
                                             <input type="file" class="form-control @error('favicon') is-invalid @enderror" 
                                                    id="favicon" name="favicon" accept="image/*">
                                             <div class="form-text">Upload favicon (ICO, PNG). Recommended size: 32x32px or 16x16px</div>
@@ -215,12 +215,12 @@
                                                         <i class="fas fa-image me-1"></i>OG Image
                                                     </label>
                                                     @if($settings->og_image_path)
-                                                        <div class="mb-2">
-                                                            <img src="{{ asset('storage/' . $settings->og_image_path) }}" 
-                                                                 alt="Current OG Image" class="img-thumbnail" style="max-height: 150px;">
-                                                            <p class="text-muted small mt-1">Current OG image</p>
-                                                        </div>
-                                                    @endif
+                                            <div class="mb-2">
+                                                <img src="{{ asset($settings->og_image_path) }}" 
+                                                     alt="Current OG Image" class="img-thumbnail" style="max-height: 150px;">
+                                                <p class="text-muted small mt-1">Current OG image</p>
+                                            </div>
+                                        @endif
                                                     <input type="file" class="form-control @error('og_image') is-invalid @enderror" 
                                                            id="og_image" name="og_image" accept="image/*">
                                                     <div class="form-text">Image for social media sharing. Recommended size: 1200x630px</div>

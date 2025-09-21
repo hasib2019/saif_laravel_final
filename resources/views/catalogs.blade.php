@@ -54,14 +54,20 @@
             @forelse($products as $product)
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                     <div class="card product-card h-100">
-                        @if($product->image)
-                            <img src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->name }}" style="height: 250px; object-fit: cover;">
-                        @else
-                            <img src="https://via.placeholder.com/300x250/f8f9fa/6c757d?text={{ urlencode($product->name) }}" class="card-img-top" alt="{{ $product->name }}" style="height: 250px; object-fit: cover;">
-                        @endif
+                        <a href="{{ route('product.show', $product->slug) }}" class="text-decoration-none">
+                            @if($product->image)
+                                <img src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->name }}" style="height: 250px; object-fit: cover;">
+                            @else
+                                <img src="https://via.placeholder.com/300x250/f8f9fa/6c757d?text={{ urlencode($product->name) }}" class="card-img-top" alt="{{ $product->name }}" style="height: 250px; object-fit: cover;">
+                            @endif
+                        </a>
                         
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <h5 class="card-title">
+                                <a href="{{ route('product.show', $product->slug) }}" class="text-decoration-none text-dark">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
                             <p class="card-text text-muted flex-grow-1">{{ Str::limit($product->short_description ?? $product->description, 120) }}</p>
                             
                             @if($product->category)
@@ -99,6 +105,16 @@
                                         </span>
                                     </div>
                                 @endif
+                                
+                                <div class="d-grid">
+                                    <a href="{{ route('product.show', $product->slug) }}" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                             </div>
                         </div>
                     </div>

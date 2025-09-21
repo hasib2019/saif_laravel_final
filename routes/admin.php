@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\WebsiteSetupController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\NewsController;
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -31,6 +34,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Pages Management
         Route::resource('pages', PageController::class);
         
+        // Gallery Management
+        Route::resource('gallery', GalleryController::class);
+        Route::post('/gallery/{gallery}/toggle-status', [GalleryController::class, 'toggleStatus'])->name('gallery.toggle-status');
+        
         // Contact Messages Management
         Route::prefix('contacts')->name('contacts.')->group(function () {
             Route::get('/', [ContactController::class, 'index'])->name('index');
@@ -39,6 +46,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::patch('/{contact}/mark-unread', [ContactController::class, 'markAsUnread'])->name('mark-unread');
             Route::delete('/{contact}', [ContactController::class, 'destroy'])->name('destroy');
             Route::post('/bulk-action', [ContactController::class, 'bulkAction'])->name('bulk-action');
+        });
+        
+        // Orders Management
+        Route::prefix('orders')->name('orders.')->group(function () {
+            Route::get('/', [OrderController::class, 'index'])->name('index');
+            Route::get('/{order}', [OrderController::class, 'show'])->name('show');
+            Route::patch('/{order}/status', [OrderController::class, 'updateStatus'])->name('update-status');
+            Route::delete('/{order}', [OrderController::class, 'destroy'])->name('destroy');
+            Route::get('/export/csv', [OrderController::class, 'export'])->name('export');
+        });
+        
+        // News Management
+        Route::prefix('news')->name('news.')->group(function () {
+            Route::get('/', [NewsController::class, 'index'])->name('index');
+            Route::get('/create', [NewsController::class, 'create'])->name('create');
+            Route::post('/', [NewsController::class, 'store'])->name('store');
+            Route::get('/{news}', [NewsController::class, 'show'])->name('show');
+            Route::get('/{news}/edit', [NewsController::class, 'edit'])->name('edit');
+            Route::put('/{news}', [NewsController::class, 'update'])->name('update');
+            Route::delete('/{news}', [NewsController::class, 'destroy'])->name('destroy');
+            Route::patch('/{news}/toggle-status', [NewsController::class, 'toggleStatus'])->name('toggle-status');
+            Route::patch('/{news}/toggle-featured', [NewsController::class, 'toggleFeatured'])->name('toggle-featured');
         });
         
         // Website Setup Management

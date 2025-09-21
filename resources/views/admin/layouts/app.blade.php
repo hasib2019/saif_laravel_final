@@ -170,10 +170,31 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}" 
+                   href="{{ route('admin.gallery.index') }}">
+                    <i class="fas fa-images me-2"></i>
+                    Gallery
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.news.*') ? 'active' : '' }}" 
+                   href="{{ route('admin.news.index') }}">
+                    <i class="fas fa-newspaper me-2"></i>
+                    News & Articles
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}" 
                    href="{{ route('admin.contacts.index') }}">
                     <i class="fas fa-envelope me-2"></i>
                     Contacts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}" 
+                   href="{{ route('admin.orders.index') }}">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    Orders
                 </a>
             </li>
             <li class="nav-item">

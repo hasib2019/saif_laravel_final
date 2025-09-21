@@ -55,6 +55,38 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <label for="price" class="form-label">Price <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control @error('price') is-invalid @enderror" 
+                                               id="price" name="price" value="{{ old('price') }}" 
+                                               step="0.01" min="0" placeholder="0.00" required>
+                                        @error('price')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="sale_price" class="form-label">Sale Price</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control @error('sale_price') is-invalid @enderror" 
+                                               id="sale_price" name="sale_price" value="{{ old('sale_price') }}" 
+                                               step="0.01" min="0" placeholder="0.00">
+                                        @error('sale_price')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-text">Optional: Leave empty if no sale price</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
                                     <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
                                     <select class="form-select @error('category_id') is-invalid @enderror" 
                                             id="category_id" name="category_id" required>
@@ -73,16 +105,27 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="price" class="form-label">Price <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control @error('price') is-invalid @enderror" 
-                                               id="price" name="price" value="{{ old('price') }}" 
-                                               step="0.01" min="0" placeholder="0.00" required>
-                                        @error('price')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                    <label for="sku" class="form-label">SKU</label>
+                                    <input type="text" class="form-control @error('sku') is-invalid @enderror" 
+                                           id="sku" name="sku" value="{{ old('sku') }}" 
+                                           placeholder="Enter product SKU">
+                                    @error('sku')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="stock_quantity" class="form-label">Stock Quantity</label>
+                                    <input type="number" class="form-control @error('stock_quantity') is-invalid @enderror" 
+                                           id="stock_quantity" name="stock_quantity" value="{{ old('stock_quantity', 0) }}" 
+                                           min="0" placeholder="0">
+                                    @error('stock_quantity')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -95,6 +138,17 @@
                             @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="short_description" class="form-label">Short Description</label>
+                            <textarea class="form-control @error('short_description') is-invalid @enderror" 
+                                      id="short_description" name="short_description" rows="2" 
+                                      placeholder="Enter brief product description (max 500 characters)">{{ old('short_description') }}</textarea>
+                            @error('short_description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text">Brief description for product listings</div>
                         </div>
 
                         <div class="mb-3">

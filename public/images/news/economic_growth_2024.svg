@@ -1,0 +1,162 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="economicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#economicGradient)"/>
+  
+  <!-- City skyline -->
+  <g fill="#1e293b" opacity="0.8">
+    <rect x="50" y="300" width="40" height="200"/>
+    <rect x="100" y="250" width="35" height="250"/>
+    <rect x="145" y="280" width="30" height="220"/>
+    <rect x="185" y="200" width="45" height="300"/>
+    <rect x="240" y="220" width="40" height="280"/>
+    <rect x="290" y="180" width="50" height="320"/>
+    <rect x="350" y="240" width="35" height="260"/>
+    <rect x="395" y="160" width="55" height="340"/>
+    <rect x="460" y="190" width="40" height="310"/>
+    <rect x="510" y="210" width="45" height="290"/>
+    <rect x="565" y="170" width="50" height="330"/>
+    <rect x="625" y="230" width="35" height="270"/>
+    <rect x="670" y="200" width="40" height="300"/>
+    <rect x="720" y="260" width="30" height="240"/>
+  </g>
+  
+  <!-- Building windows -->
+  <g fill="#fbbf24" opacity="0.6">
+    <!-- Building 1 -->
+    <rect x="55" y="320" width="6" height="8"/>
+    <rect x="65" y="320" width="6" height="8"/>
+    <rect x="75" y="320" width="6" height="8"/>
+    <rect x="55" y="340" width="6" height="8"/>
+    <rect x="65" y="340" width="6" height="8"/>
+    <rect x="75" y="340" width="6" height="8"/>
+    
+    <!-- Building 2 -->
+    <rect x="105" y="270" width="6" height="8"/>
+    <rect x="115" y="270" width="6" height="8"/>
+    <rect x="125" y="270" width="6" height="8"/>
+    <rect x="105" y="290" width="6" height="8"/>
+    <rect x="115" y="290" width="6" height="8"/>
+    <rect x="125" y="290" width="6" height="8"/>
+    
+    <!-- More windows for other buildings -->
+    <rect x="400" y="180" width="8" height="10"/>
+    <rect x="415" y="180" width="8" height="10"/>
+    <rect x="430" y="180" width="8" height="10"/>
+    <rect x="400" y="200" width="8" height="10"/>
+    <rect x="415" y="200" width="8" height="10"/>
+    <rect x="430" y="200" width="8" height="10"/>
+  </g>
+  
+  <!-- Growth chart -->
+  <g transform="translate(100, 80)">
+    <!-- Chart background -->
+    <rect x="0" y="0" width="300" height="150" fill="#ffffff" opacity="0.9" rx="10"/>
+    
+    <!-- Grid lines -->
+    <g stroke="#e5e7eb" stroke-width="1">
+      <line x1="30" y1="20" x2="30" y2="130"/>
+      <line x1="30" y1="130" x2="270" y2="130"/>
+      <line x1="30" y1="110" x2="270" y2="110"/>
+      <line x1="30" y1="90" x2="270" y2="90"/>
+      <line x1="30" y1="70" x2="270" y2="70"/>
+      <line x1="30" y1="50" x2="270" y2="50"/>
+      <line x1="30" y1="30" x2="270" y2="30"/>
+    </g>
+    
+    <!-- Growth line -->
+    <path d="M30 120 L70 110 L110 95 L150 85 L190 70 L230 50 L270 30" 
+          stroke="#10b981" stroke-width="4" fill="none"/>
+    
+    <!-- Data points -->
+    <g fill="#10b981">
+      <circle cx="30" cy="120" r="4"/>
+      <circle cx="70" cy="110" r="4"/>
+      <circle cx="110" cy="95" r="4"/>
+      <circle cx="150" cy="85" r="4"/>
+      <circle cx="190" cy="70" r="4"/>
+      <circle cx="230" cy="50" r="4"/>
+      <circle cx="270" cy="30" r="4"/>
+    </g>
+    
+    <!-- Chart title -->
+    <text x="150" y="15" text-anchor="middle" fill="#374151" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
+      GDP Growth Rate
+    </text>
+  </g>
+  
+  <!-- Dollar signs -->
+  <g fill="url(#goldGradient)" opacity="0.7">
+    <text x="500" y="120" font-family="Arial, sans-serif" font-size="40" font-weight="bold">$</text>
+    <text x="600" y="100" font-family="Arial, sans-serif" font-size="30" font-weight="bold">$</text>
+    <text x="550" y="80" font-family="Arial, sans-serif" font-size="25" font-weight="bold">$</text>
+  </g>
+  
+  <!-- Stock market ticker -->
+  <g transform="translate(450, 250)">
+    <rect x="0" y="0" width="200" height="40" fill="#000000" opacity="0.8" rx="5"/>
+    <text x="10" y="15" fill="#10b981" font-family="monospace" font-size="10">
+      NASDAQ +2.5%
+    </text>
+    <text x="10" y="30" fill="#10b981" font-family="monospace" font-size="10">
+      S&amp;P 500 +1.8%
+    </text>
+    <text x="120" y="15" fill="#10b981" font-family="monospace" font-size="10">
+      DOW +3.2%
+    </text>
+    <text x="120" y="30" fill="#10b981" font-family="monospace" font-size="10">
+      FTSE +2.1%
+    </text>
+  </g>
+  
+  <!-- Upward arrows -->
+  <g fill="#10b981" opacity="0.8">
+    <polygon points="150,350 160,330 170,350 160,340"/>
+    <polygon points="250,320 260,300 270,320 260,310"/>
+    <polygon points="350,340 360,320 370,340 360,330"/>
+    <polygon points="450,360 460,340 470,360 460,350"/>
+  </g>
+  
+  <!-- Business people silhouettes -->
+  <g fill="#1e293b" opacity="0.6">
+    <!-- Person 1 -->
+    <circle cx="80" cy="480" r="8"/>
+    <rect x="75" y="488" width="10" height="20" rx="5"/>
+    
+    <!-- Person 2 -->
+    <circle cx="120" cy="480" r="8"/>
+    <rect x="115" y="488" width="10" height="20" rx="5"/>
+    
+    <!-- Person 3 -->
+    <circle cx="160" cy="480" r="8"/>
+    <rect x="155" y="488" width="10" height="20" rx="5"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="550" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="28" font-weight="bold">
+    Economic Growth Reaches New Heights
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="575" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" opacity="0.9">
+    Q4 2024 Shows Record 4.2% GDP Increase
+  </text>
+  
+  <!-- Financial symbols -->
+  <g stroke="#fbbf24" stroke-width="2" fill="none" opacity="0.5">
+    <circle cx="700" cy="120" r="15"/>
+    <line x1="690" y1="120" x2="710" y2="120"/>
+    <line x1="700" y1="110" x2="700" y2="130"/>
+  </g>
+</svg>

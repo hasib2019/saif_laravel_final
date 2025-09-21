@@ -6,7 +6,12 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\JpegEncoder;
+use Intervention\Image\Encoders\PngEncoder;
+use Intervention\Image\Encoders\WebpEncoder;
+use Intervention\Image\Encoders\GifEncoder;
 use Illuminate\Support\Facades\Log;
 
 class ImageOptimization
@@ -108,23 +113,22 @@ class ImageOptimization
     private function processImage($file)
     {
         try {
-            $image = Image::make($file->getRealPath());
+            // Create ImageManager instance with GD driver
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($file->getRealPath());
             $originalPath = $file->getRealPath();
             
             // Get original dimensions
             $originalWidth = $image->width();
             $originalHeight = $image->height();
             
-            // Resize if too large
+            // Resize if too large (v3 syntax - maintains aspect ratio by default)
             if ($originalWidth > self::MAX_WIDTH || $originalHeight > self::MAX_HEIGHT) {
-                $image->resize(self::MAX_WIDTH, self::MAX_HEIGHT, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                $image->resize(self::MAX_WIDTH, self::MAX_HEIGHT);
             }
             
             // Auto-orient based on EXIF data
-            $image->orientate();
+            $image->orient();
             
             // Apply sharpening for better quality after resize
             if ($originalWidth > self::MAX_WIDTH || $originalHeight > self::MAX_HEIGHT) {
@@ -162,34 +166,33 @@ class ImageOptimization
         switch ($extension) {
             case 'jpg':
             case 'jpeg':
-                // Enable progressive JPEG for better loading
-                $image->interlace(true);
-                $image->encode('jpg', self::QUALITY_SETTINGS['jpg']);
+                // Use JPEG encoder with quality setting
+                $image->encode(new JpegEncoder(quality: self::QUALITY_SETTINGS['jpg'], progressive: true));
                 break;
                 
             case 'png':
-                // Optimize PNG compression
-                $image->encode('png', self::QUALITY_SETTINGS['png']);
+                // Use PNG encoder with compression setting
+                $image->encode(new PngEncoder());
                 break;
                 
             case 'webp':
-                $image->encode('webp', self::QUALITY_SETTINGS['webp']);
+                // Use WebP encoder with quality setting
+                $image->encode(new WebpEncoder(quality: self::QUALITY_SETTINGS['webp']));
                 break;
                 
             case 'gif':
                 // For GIF, convert to PNG for better compression (unless animated)
                 if (!$this->isAnimatedGif($file->getRealPath())) {
-                    $image->encode('png', self::QUALITY_SETTINGS['png']);
+                    $image->encode(new PngEncoder());
                 } else {
                     // Keep as GIF for animated image
-                    $image->encode('gif');
+                    $image->encode(new GifEncoder());
                 }
                 break;
                 
             default:
                 // Convert unknown formats to JPEG
-                $image->interlace(true);
-                $image->encode('jpg', self::QUALITY_SETTINGS['jpg']);
+                $image->encode(new JpegEncoder(quality: self::QUALITY_SETTINGS['jpg'], progressive: true));
                 break;
         }
     }
