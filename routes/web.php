@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SupplierController;
 use App\Services\CacheService;
 
 // Home page
@@ -78,7 +79,9 @@ Route::get('/page/{slug}', function ($slug, CacheService $cacheService) {
 
 // About Us page
 Route::get('/about', function () {
-    return view('about');
+    $aboutSettings = \App\Models\AboutSetting::getSettings();
+    $teamMembers = \App\Models\TeamMember::active()->ordered()->get();
+    return view('about', compact('aboutSettings', 'teamMembers'));
 })->name('about');
 
 // Gallery routes
@@ -108,4 +111,12 @@ Route::prefix('news')->name('news.')->group(function () {
     Route::get('/rss', [NewsController::class, 'rss'])->name('rss');
     Route::get('/sitemap', [NewsController::class, 'sitemap'])->name('sitemap');
     Route::get('/{slug}', [NewsController::class, 'show'])->name('show');
+});
+
+// Suppliers routes
+Route::prefix('suppliers')->name('suppliers.')->group(function () {
+    Route::get('/', [SupplierController::class, 'index'])->name('index');
+    Route::get('/search', [SupplierController::class, 'search'])->name('search');
+    Route::get('/load-more', [SupplierController::class, 'loadMore'])->name('load-more');
+    Route::get('/{slug}', [SupplierController::class, 'show'])->name('show');
 });

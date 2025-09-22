@@ -89,9 +89,9 @@
 
                         <div class="mb-3">
                             <label for="content" class="form-label">Page Content <span class="text-danger">*</span></label>
-                            <textarea class="form-control @error('content') is-invalid @enderror" 
-                                      id="content" name="content" rows="15" 
-                                      placeholder="Enter page content here..." required>{{ old('content', $page->content) }}</textarea>
+                            <div id="content" style="height: 400px;"></div>
+                            <textarea class="form-control @error('content') is-invalid @enderror d-none" 
+                                      name="content" required>{{ old('content', $page->content) }}</textarea>
                             @error('content')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -257,14 +257,87 @@ $(document).ready(function() {
         $(this).next('.invalid-feedback').next('.form-text').removeClass('text-muted text-warning text-danger').addClass(color);
     });
 
-    // Initialize rich text editor for content
-    if (typeof tinymce !== 'undefined') {
-        tinymce.init({
-            selector: '#content',
-            height: 400,
-            plugins: 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
-            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-            content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }'
+    // Initialize Quill.js rich text editor (completely free)
+    if (typeof Quill !== 'undefined') {
+        // Create toolbar configuration
+        var toolbarOptions = [
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            [{ 'font': [] }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'direction': 'rtl' }],
+            [{ 'align': [] }],
+            ['link', 'image', 'video'],
+            ['blockquote', 'code-block'],
+            ['clean']
+        ];
+
+        // Initialize Quill editor
+        var quill = new Quill('#content', {
+            theme: 'snow',
+            modules: {
+                toolbar: toolbarOptions
+            },
+            placeholder: 'Enter page content here...'
+        });
+
+        // Set initial content if exists
+        var initialContent = document.querySelector('textarea[name="content"]').value;
+        if (initialContent) {
+            quill.root.innerHTML = initialContent;
+        }
+
+        // Update hidden textarea when content changes
+        quill.on('text-change', function() {
+            document.querySelector('textarea[name="content"]').value = quill.root.innerHTML;
+        });
+
+        // Handle image uploads
+        quill.getModule('toolbar').addHandler('image', function() {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+            
+            input.onchange = function() {
+                var file = this.files[0];
+                if (file) {
+                    var formData = new FormData();
+                    formData.append('file', file);
+                    
+                    // Show loading state
+                    var range = quill.getSelection();
+                    quill.insertText(range.index, 'Uploading image...', 'italic', true);
+                    
+                    fetch('{{ route("admin.upload-image") }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Remove loading text
+                        quill.deleteText(range.index, 'Uploading image...'.length);
+                        
+                        // Insert image
+                        quill.insertEmbed(range.index, 'image', data.location);
+                        quill.setSelection(range.index + 1);
+                    })
+                    .catch(error => {
+                        console.error('Error uploading image:', error);
+                        // Remove loading text
+                        quill.deleteText(range.index, 'Uploading image...'.length);
+                        alert('Failed to upload image. Please try again.');
+                    });
+                }
+            };
+            
+            input.click();
         });
     }
 });

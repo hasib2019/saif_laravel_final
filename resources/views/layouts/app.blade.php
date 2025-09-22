@@ -421,7 +421,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <small>MIN | ∼ $37.13 (0.92%)</small>
+                    
                 </div>
                 <div class="col-md-6 text-end">
                     <div class="d-flex justify-content-end align-items-center">
@@ -429,7 +429,7 @@
                             <small>Contact</small>
                         </a>
                         <span class="text-white me-3">|</span>
-                        <a href="#" class="text-white text-decoration-none me-3">
+                        <a href="{{ route('suppliers.index') }}" class="text-white text-decoration-none me-3">
                             <small>Suppliers</small>
                         </a>
                         <span class="text-white me-3">|</span>
@@ -479,7 +479,11 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
-                            href="{{ route('home') }}">About us</a>
+                            href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"
+                            href="{{ route('about') }}">About us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('catalogs') ? 'active' : '' }}"
@@ -489,11 +493,24 @@
                         <a class="nav-link {{ request()->routeIs('gallery*') ? 'active' : '' }}"
                             href="{{ route('gallery') }}">Gallery</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sustainability</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Investor Centre</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="sustainabilityDropdown" role="button" 
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Sustainability
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="sustainabilityDropdown">
+                            @if($navigationPages && $navigationPages->count() > 0)
+                                @foreach($navigationPages as $page)
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('page.show', $page->slug) }}">
+                                            {{ $page->title }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li><a class="dropdown-item" href="#">No pages available</a></li>
+                            @endif
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('news.*') ? 'active' : '' }}" 
@@ -513,8 +530,12 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <h5>{{ config('app.name', 'Laravel') }}</h5>
+                <div class="col-lg-4 col-md-6 mb-4 text-center">
+                    @if($globalSettings->logo_path)
+                    <img src="{{ asset($globalSettings->logo_path) }}" alt="{{ config('app.name', 'Laravel') }}" style="height: 40px;">
+                @else
+                    {{ config('app.name', 'Laravel') }}
+                @endif
                     <p class="text-white">{{ $globalSettings->footer_description ?? __('messages.company_description') }}</p>
                     <div class="social-links">
                         <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>

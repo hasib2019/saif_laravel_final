@@ -11,6 +11,9 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\SupplierController;
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -82,5 +85,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/footer-settings', [WebsiteSetupController::class, 'footerSettings'])->name('footer-settings');
             Route::put('/footer-settings', [WebsiteSetupController::class, 'updateFooterSettings'])->name('update-footer-settings');
         });
+
+        // About Page Management
+        Route::prefix('about')->name('about.')->group(function () {
+            Route::get('/', [AboutController::class, 'index'])->name('index');
+            Route::put('/update', [AboutController::class, 'update'])->name('update');
+        });
+
+        // Team Management
+        Route::resource('team', TeamController::class);
+        
+        // Suppliers Management
+        Route::resource('suppliers', SupplierController::class);
+        
+        // TinyMCE Image Upload
+        Route::post('/upload-image', [AdminController::class, 'uploadImage'])->name('upload-image');
     });
 });

@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="content">
-                    {!! nl2br(e($page->content)) !!}
+                    {!! $page->content !!}
                 </div>
                 
                 <!-- Navigation -->

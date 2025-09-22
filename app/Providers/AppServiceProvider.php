@@ -57,6 +57,16 @@ class AppServiceProvider extends ServiceProvider
         // Share website settings with all views
         View::composer('*', function ($view) {
             $view->with('globalSettings', WebsiteSettings::getSettings());
+            
+            // Share navigation pages with all views
+            $navigationPages = \App\Models\Page::where('is_active', true)
+                ->where('show_in_menu', true)
+                ->orderBy('sort_order')
+                ->orderBy('title')
+                ->select('id', 'title', 'slug')
+                ->get();
+            
+            $view->with('navigationPages', $navigationPages);
         });
     }
 }

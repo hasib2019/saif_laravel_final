@@ -29,6 +29,8 @@
             color: white;
             z-index: 1000;
             transition: all 0.3s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
         
         .sidebar-header {
@@ -38,6 +40,8 @@
         
         .sidebar-nav {
             padding: 1rem 0;
+            flex: 1;
+            min-height: 0;
         }
         
         .nav-link {
@@ -115,6 +119,24 @@
             color: white;
         }
         
+        /* Custom scrollbar for sidebar */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -166,7 +188,7 @@
                 <a class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}" 
                    href="{{ route('admin.pages.index') }}">
                     <i class="fas fa-file-alt me-2"></i>
-                    Pages
+                    Sustainability
                 </a>
             </li>
             <li class="nav-item">
@@ -181,6 +203,27 @@
                    href="{{ route('admin.news.index') }}">
                     <i class="fas fa-newspaper me-2"></i>
                     News & Articles
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.about.*') ? 'active' : '' }}" 
+                   href="{{ route('admin.about.index') }}">
+                    <i class="fas fa-info-circle me-2"></i>
+                    About Page
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.team.*') ? 'active' : '' }}" 
+                   href="{{ route('admin.team.index') }}">
+                    <i class="fas fa-users me-2"></i>
+                    Team Members
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.suppliers.*') ? 'active' : '' }}" 
+                   href="{{ route('admin.suppliers.index') }}">
+                    <i class="fas fa-handshake me-2"></i>
+                    Suppliers
                 </a>
             </li>
             <li class="nav-item">
@@ -282,6 +325,10 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    
+    <!-- Quill.js Rich Text Editor (Completely Free) -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
     
     <script>
         // Sidebar toggle for mobile
