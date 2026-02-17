@@ -12,7 +12,7 @@
                         <i class="fas fa-user-edit me-2"></i>Edit Team Member: {{ $teamMember->name }}
                     </h3>
                     <div>
-                        <a href="{{ route('admin.team.show', $teamMember->id) }}" class="btn btn-info">
+                        <a href="{{ route('admin.team.show', $teamMember) }}" class="btn btn-info">
                             <i class="fas fa-eye me-2"></i>View
                         </a>
                         <a href="{{ route('admin.team.index') }}" class="btn btn-secondary">
@@ -34,7 +34,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('admin.team.update', $teamMember->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.team.update', $teamMember) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 

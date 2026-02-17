@@ -12,7 +12,7 @@
                         <i class="fas fa-user me-2"></i>Team Member Details: {{ $teamMember->name }}
                     </h3>
                     <div>
-                        <a href="{{ route('admin.team.edit', $teamMember->id) }}" class="btn btn-warning">
+                        <a href="{{ route('admin.team.edit', $teamMember) }}" class="btn btn-warning">
                             <i class="fas fa-edit me-2"></i>Edit
                         </a>
                         <a href="{{ route('admin.team.index') }}" class="btn btn-secondary">
@@ -211,7 +211,7 @@
                             <i class="fas fa-arrow-left me-2"></i>Back to Team Members
                         </a>
                         <div>
-                            <a href="{{ route('admin.team.edit', $teamMember->id) }}" class="btn btn-warning">
+                            <a href="{{ route('admin.team.edit', $teamMember) }}" class="btn btn-warning">
                                 <i class="fas fa-edit me-2"></i>Edit Member
                             </a>
                             <button type="button" class="btn btn-danger" onclick="confirmDelete()">
@@ -239,7 +239,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form action="{{ route('admin.team.destroy', $teamMember->id) }}" method="POST" style="display: inline;">
+                <form action="{{ route('admin.team.destroy', $teamMember) }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>

@@ -81,11 +81,11 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ route('admin.team.show', $member->id) }}" 
+                                                    <a href="{{ route('admin.team.show', $member) }}" 
                                                        class="btn btn-sm btn-info" title="View">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ route('admin.team.edit', $member->id) }}" 
+                                                    <a href="{{ route('admin.team.edit', $member) }}" 
                                                        class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
